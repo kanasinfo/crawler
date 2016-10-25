@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         LoginService loginService = new LoginService();
-//        loginService.login();
+        loginService.login();
 
         Document document = FetchUtils.getByUrl(PropUtils.getProp("url.list"));
         ListIterator listIterator = document.select("table ol li a").listIterator();
