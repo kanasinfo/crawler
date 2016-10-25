@@ -1,5 +1,6 @@
 package com.ch.core;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Map;
 public class RequestParams {
     private static RequestParams ourInstance = new RequestParams();
 
-    private Map<String, String> cookies;
+    private Map<String, String> cookies = new HashMap<>();
 
     public static RequestParams getInstance() {
         return ourInstance;

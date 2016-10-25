@@ -1,12 +1,12 @@
 package com.ch;
 
-import com.ch.core.RequestParams;
-import com.ch.utils.PropertiesUtils;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
+import com.ch.service.LoginService;
+import com.ch.utils.FetchUtils;
+import com.ch.utils.PropUtils;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.ListIterator;
 
 /**
  * Created by Devid on 2016/10/25.
@@ -14,24 +14,15 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        initParams();
+        LoginService loginService = new LoginService();
+//        loginService.login();
 
-        Document doc = Jsoup.connect(PropertiesUtils.getProperties("url.list"))
-                .cookies(RequestParams.getInstance().getCookies())
-                .get();
-        String title = doc.title();
-        System.out.println(title);
+        Document document = FetchUtils.getByUrl(PropUtils.getProp("url.list"));
+        ListIterator listIterator = document.select("table ol li a").listIterator();
+        while (listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
     }
 
-    private static void initParams() throws IOException {
-        Connection.Response res = Jsoup.connect(PropertiesUtils.getProperties("url.login"))
-                .data(
-                        PropertiesUtils.getProperties("form.login.key.username"), "devid.ge",
-                        PropertiesUtils.getProperties("form.login.key.password"), "aibing0420"
-                )
-                .method(Connection.Method.POST)
-                .ignoreContentType(true)
-                .execute();
-        RequestParams.getInstance().setCookies(res.cookies());
-    }
+
 }
