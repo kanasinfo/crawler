@@ -14,15 +14,19 @@ import java.util.ListIterator;
  */
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) {
         logger.info("开始抓取页面列表");
         LoginService loginService = new LoginService();
-        loginService.login();
-
-        Document document = FetchUtils.getByUrl(PropUtils.getProp("url.list"));
-        ListIterator listIterator = document.select("table ol li a").listIterator();
-        while (listIterator.hasNext()) {
-            logger.info(listIterator.next());
+        try {
+            loginService.login();
+            Document document = FetchUtils.getByUrl(PropUtils.getProp("url.list"));
+            ListIterator listIterator = document.select("table ol li a").listIterator();
+            while (listIterator.hasNext()) {
+                logger.info(listIterator.next());
+            }
+        } catch (IOException e) {
+            logger.info(e);
         }
     }
 
