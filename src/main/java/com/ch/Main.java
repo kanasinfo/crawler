@@ -1,5 +1,6 @@
 package com.ch;
 
+import com.ch.service.FetchListService;
 import com.ch.service.LoginService;
 import com.ch.utils.FetchUtils;
 import com.ch.utils.PropUtils;
@@ -14,14 +15,8 @@ import java.util.ListIterator;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        LoginService loginService = new LoginService();
-        loginService.login();
-
-        Document document = FetchUtils.getByUrl(PropUtils.getProp("url.list"));
-        ListIterator listIterator = document.select("table ol li a").listIterator();
-        while (listIterator.hasNext()) {
-            System.out.println(listIterator.next());
-        }
+        FetchListService service = new FetchListService();
+        service.fetchPage(PropUtils.getProp("url.list"));
     }
 
 
