@@ -1,6 +1,6 @@
 package com.ch;
 
-import com.ch.service.FetchListService;
+import com.ch.service.FetchService;
 import com.ch.service.LoginService;
 import com.ch.utils.FetchUtils;
 import com.ch.utils.PropUtils;
