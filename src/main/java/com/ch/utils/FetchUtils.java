@@ -1,6 +1,7 @@
 package com.ch.utils;
 
 import com.ch.core.RequestParams;
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +18,7 @@ public final class FetchUtils {
         Document doc = Jsoup.connect(url)
                 .cookies(RequestParams.getInstance().getCookies())
                 .get();
+        logger.info("response doc: " + new Gson().toJson(doc));
         return doc;
     }
 }

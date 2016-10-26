@@ -21,6 +21,7 @@ public class Main {
         try {
             loginService.login();
             Document document = FetchUtils.getByUrl(PropUtils.getProp("url.list"));
+            logger.info("document: " + document);
             ListIterator listIterator = document.select("table ol li a").listIterator();
             while (listIterator.hasNext()) {
                 logger.info(listIterator.next());
